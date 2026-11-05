@@ -1,0 +1,292 @@
+{
+  "rows": [
+    {
+      "id": 1,
+      "name": "Mazda RX4",
+      "weight_kg": 1188.4,
+      "weight_1000_lbs": 2.62,
+      "mpg": 21.0,
+      "hp": 110,
+      "cyl": "6"
+    },
+    {
+      "id": 2,
+      "name": "Mazda RX4 Wag",
+      "weight_kg": 1304.1,
+      "weight_1000_lbs": 2.875,
+      "mpg": 21.0,
+      "hp": 110,
+      "cyl": "6"
+    },
+    {
+      "id": 3,
+      "name": "Datsun 710",
+      "weight_kg": 1052.3,
+      "weight_1000_lbs": 2.32,
+      "mpg": 22.8,
+      "hp": 93,
+      "cyl": "4"
+    },
+    {
+      "id": 4,
+      "name": "Hornet 4 Drive",
+      "weight_kg": 1458.3,
+      "weight_1000_lbs": 3.215,
+      "mpg": 21.4,
+      "hp": 110,
+      "cyl": "6"
+    },
+    {
+      "id": 5,
+      "name": "Hornet Sportabout",
+      "weight_kg": 1560.4,
+      "weight_1000_lbs": 3.44,
+      "mpg": 18.7,
+      "hp": 175,
+      "cyl": "8"
+    },
+    {
+      "id": 6,
+      "name": "Valiant",
+      "weight_kg": 1569.4,
+      "weight_1000_lbs": 3.46,
+      "mpg": 18.1,
+      "hp": 105,
+      "cyl": "6"
+    },
+    {
+      "id": 7,
+      "name": "Duster 360",
+      "weight_kg": 1619.3,
+      "weight_1000_lbs": 3.57,
+      "mpg": 14.3,
+      "hp": 245,
+      "cyl": "8"
+    },
+    {
+      "id": 8,
+      "name": "Merc 240D",
+      "weight_kg": 1447.0,
+      "weight_1000_lbs": 3.19,
+      "mpg": 24.4,
+      "hp": 62,
+      "cyl": "4"
+    },
+    {
+      "id": 9,
+      "name": "Merc 230",
+      "weight_kg": 1428.8,
+      "weight_1000_lbs": 3.15,
+      "mpg": 22.8,
+      "hp": 95,
+      "cyl": "4"
+    },
+    {
+      "id": 10,
+      "name": "Merc 280",
+      "weight_kg": 1560.4,
+      "weight_1000_lbs": 3.44,
+      "mpg": 19.2,
+      "hp": 123,
+      "cyl": "6"
+    },
+    {
+      "id": 11,
+      "name": "Merc 280C",
+      "weight_kg": 1560.4,
+      "weight_1000_lbs": 3.44,
+      "mpg": 17.8,
+      "hp": 123,
+      "cyl": "6"
+    },
+    {
+      "id": 12,
+      "name": "Merc 450SE",
+      "weight_kg": 1846.1,
+      "weight_1000_lbs": 4.07,
+      "mpg": 16.4,
+      "hp": 180,
+      "cyl": "8"
+    },
+    {
+      "id": 13,
+      "name": "Merc 450SL",
+      "weight_kg": 1691.9,
+      "weight_1000_lbs": 3.73,
+      "mpg": 17.3,
+      "hp": 180,
+      "cyl": "8"
+    },
+    {
+      "id": 14,
+      "name": "Merc 450SLC",
+      "weight_kg": 1714.6,
+      "weight_1000_lbs": 3.78,
+      "mpg": 15.2,
+      "hp": 180,
+      "cyl": "8"
+    },
+    {
+      "id": 15,
+      "name": "Cadillac Fleetwood",
+      "weight_kg": 2381.4,
+      "weight_1000_lbs": 5.25,
+      "mpg": 10.4,
+      "hp": 205,
+      "cyl": "8"
+    },
+    {
+      "id": 16,
+      "name": "Lincoln Continental",
+      "weight_kg": 2460.3,
+      "weight_1000_lbs": 5.424,
+      "mpg": 10.4,
+      "hp": 215,
+      "cyl": "8"
+    },
+    {
+      "id": 17,
+      "name": "Chrysler Imperial",
+      "weight_kg": 2424.5,
+      "weight_1000_lbs": 5.345,
+      "mpg": 14.7,
+      "hp": 230,
+      "cyl": "8"
+    },
+    {
+      "id": 18,
+      "name": "Fiat 128",
+      "weight_kg": 997.9,
+      "weight_1000_lbs": 2.2,
+      "mpg": 32.4,
+      "hp": 66,
+      "cyl": "4"
+    },
+    {
+      "id": 19,
+      "name": "Honda Civic",
+      "weight_kg": 732.6,
+      "weight_1000_lbs": 1.615,
+      "mpg": 30.4,
+      "hp": 52,
+      "cyl": "4"
+    },
+    {
+      "id": 20,
+      "name": "Toyota Corolla",
+      "weight_kg": 832.3,
+      "weight_1000_lbs": 1.835,
+      "mpg": 33.9,
+      "hp": 65,
+      "cyl": "4"
+    },
+    {
+      "id": 21,
+      "name": "Toyota Corona",
+      "weight_kg": 1118.1,
+      "weight_1000_lbs": 2.465,
+      "mpg": 21.5,
+      "hp": 97,
+      "cyl": "4"
+    },
+    {
+      "id": 22,
+      "name": "Dodge Challenger",
+      "weight_kg": 1596.6,
+      "weight_1000_lbs": 3.52,
+      "mpg": 15.5,
+      "hp": 150,
+      "cyl": "8"
+    },
+    {
+      "id": 23,
+      "name": "AMC Javelin",
+      "weight_kg": 1558.1,
+      "weight_1000_lbs": 3.435,
+      "mpg": 15.2,
+      "hp": 150,
+      "cyl": "8"
+    },
+    {
+      "id": 24,
+      "name": "Camaro Z28",
+      "weight_kg": 1741.8,
+      "weight_1000_lbs": 3.84,
+      "mpg": 13.3,
+      "hp": 245,
+      "cyl": "8"
+    },
+    {
+      "id": 25,
+      "name": "Pontiac Firebird",
+      "weight_kg": 1744.1,
+      "weight_1000_lbs": 3.845,
+      "mpg": 19.2,
+      "hp": 175,
+      "cyl": "8"
+    },
+    {
+      "id": 26,
+      "name": "Fiat X1-9",
+      "weight_kg": 877.7,
+      "weight_1000_lbs": 1.935,
+      "mpg": 27.3,
+      "hp": 66,
+      "cyl": "4"
+    },
+    {
+      "id": 27,
+      "name": "Porsche 914-2",
+      "weight_kg": 970.7,
+      "weight_1000_lbs": 2.14,
+      "mpg": 26.0,
+      "hp": 91,
+      "cyl": "4"
+    },
+    {
+      "id": 28,
+      "name": "Lotus Europa",
+      "weight_kg": 686.3,
+      "weight_1000_lbs": 1.513,
+      "mpg": 30.4,
+      "hp": 113,
+      "cyl": "4"
+    },
+    {
+      "id": 29,
+      "name": "Ford Pantera L",
+      "weight_kg": 1437.9,
+      "weight_1000_lbs": 3.17,
+      "mpg": 15.8,
+      "hp": 264,
+      "cyl": "8"
+    },
+    {
+      "id": 30,
+      "name": "Ferrari Dino",
+      "weight_kg": 1256.5,
+      "weight_1000_lbs": 2.77,
+      "mpg": 19.7,
+      "hp": 175,
+      "cyl": "6"
+    },
+    {
+      "id": 31,
+      "name": "Maserati Bora",
+      "weight_kg": 1619.3,
+      "weight_1000_lbs": 3.57,
+      "mpg": 15.0,
+      "hp": 335,
+      "cyl": "8"
+    },
+    {
+      "id": 32,
+      "name": "Volvo 142E",
+      "weight_kg": 1261.0,
+      "weight_1000_lbs": 2.78,
+      "mpg": 21.4,
+      "hp": 109,
+      "cyl": "4"
+    }
+  ]
+}

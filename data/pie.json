@@ -1,0 +1,9 @@
+{
+  "total": 100310,
+  "rows": [
+    {"modalidad": "Ciències i tecnologia", "nombre_es": "Ciencias y tecnología", "alumnos": 47697, "color": "#2C6F9B", "porcentaje": 47.5496},
+    {"modalidad": "Humanitats i ciències socials", "nombre_es": "Humanidades y ciencias sociales", "alumnos": 45064, "color": "#D9A052", "porcentaje": 44.9247},
+    {"modalidad": "Arts", "nombre_es": "Artes", "alumnos": 7340, "color": "#8A72B5", "porcentaje": 7.3173},
+    {"modalidad": "General", "nombre_es": "General", "alumnos": 209, "color": "#5A9B8E", "porcentaje": 0.2084}
+  ]
+}

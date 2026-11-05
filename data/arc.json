@@ -1,0 +1,355 @@
+{
+  "nodes": [
+    {
+      "id": "Verstappen",
+      "nombre": "Max Verstappen",
+      "team": "Red Bull",
+      "podios": 14,
+      "grado": 9,
+      "fuerza": 28
+    },
+    {
+      "id": "Pérez",
+      "nombre": "Sergio Pérez",
+      "team": "Red Bull",
+      "podios": 4,
+      "grado": 4,
+      "fuerza": 8
+    },
+    {
+      "id": "Sainz",
+      "nombre": "Carlos Sainz",
+      "team": "Ferrari",
+      "podios": 9,
+      "grado": 7,
+      "fuerza": 18
+    },
+    {
+      "id": "Leclerc",
+      "nombre": "Charles Leclerc",
+      "team": "Ferrari",
+      "podios": 13,
+      "grado": 7,
+      "fuerza": 26
+    },
+    {
+      "id": "Norris",
+      "nombre": "Lando Norris",
+      "team": "McLaren",
+      "podios": 13,
+      "grado": 7,
+      "fuerza": 26
+    },
+    {
+      "id": "Piastri",
+      "nombre": "Oscar Piastri",
+      "team": "McLaren",
+      "podios": 8,
+      "grado": 6,
+      "fuerza": 16
+    },
+    {
+      "id": "Russell",
+      "nombre": "George Russell",
+      "team": "Mercedes",
+      "podios": 4,
+      "grado": 6,
+      "fuerza": 8
+    },
+    {
+      "id": "Hamilton",
+      "nombre": "Lewis Hamilton",
+      "team": "Mercedes",
+      "podios": 5,
+      "grado": 6,
+      "fuerza": 10
+    },
+    {
+      "id": "Ocon",
+      "nombre": "Esteban Ocon",
+      "team": "Alpine",
+      "podios": 1,
+      "grado": 2,
+      "fuerza": 2
+    },
+    {
+      "id": "Gasly",
+      "nombre": "Pierre Gasly",
+      "team": "Alpine",
+      "podios": 1,
+      "grado": 2,
+      "fuerza": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "Gasly",
+      "target": "Ocon",
+      "weight": 1,
+      "gps": [
+        "São Paulo"
+      ]
+    },
+    {
+      "source": "Gasly",
+      "target": "Verstappen",
+      "weight": 1,
+      "gps": [
+        "São Paulo"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Leclerc",
+      "weight": 1,
+      "gps": [
+        "Bélgica"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Norris",
+      "weight": 3,
+      "gps": [
+        "España",
+        "Gran Bretaña",
+        "Hungría"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Piastri",
+      "weight": 2,
+      "gps": [
+        "Hungría",
+        "Bélgica"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Russell",
+      "weight": 1,
+      "gps": [
+        "Las Vegas"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Sainz",
+      "weight": 1,
+      "gps": [
+        "Las Vegas"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Verstappen",
+      "weight": 2,
+      "gps": [
+        "España",
+        "Gran Bretaña"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Norris",
+      "weight": 7,
+      "gps": [
+        "Australia",
+        "Miami",
+        "Emilia-Romaña",
+        "Países Bajos",
+        "Italia",
+        "México",
+        "Abu Dabi"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Piastri",
+      "weight": 5,
+      "gps": [
+        "Mónaco",
+        "Bélgica",
+        "Italia",
+        "Azerbaiyán",
+        "Catar"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Pérez",
+      "weight": 1,
+      "gps": [
+        "Arabia Saudí"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Russell",
+      "weight": 1,
+      "gps": [
+        "Azerbaiyán"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Sainz",
+      "weight": 5,
+      "gps": [
+        "Australia",
+        "Mónaco",
+        "Estados Unidos",
+        "México",
+        "Abu Dabi"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Verstappen",
+      "weight": 6,
+      "gps": [
+        "Arabia Saudí",
+        "Miami",
+        "Emilia-Romaña",
+        "Países Bajos",
+        "Estados Unidos",
+        "Catar"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Piastri",
+      "weight": 3,
+      "gps": [
+        "Hungría",
+        "Italia",
+        "Singapur"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Pérez",
+      "weight": 1,
+      "gps": [
+        "China"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Russell",
+      "weight": 1,
+      "gps": [
+        "Canadá"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Sainz",
+      "weight": 3,
+      "gps": [
+        "Australia",
+        "México",
+        "Abu Dabi"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Verstappen",
+      "weight": 8,
+      "gps": [
+        "China",
+        "Miami",
+        "Emilia-Romaña",
+        "Canadá",
+        "España",
+        "Gran Bretaña",
+        "Países Bajos",
+        "Singapur"
+      ]
+    },
+    {
+      "source": "Ocon",
+      "target": "Verstappen",
+      "weight": 1,
+      "gps": [
+        "São Paulo"
+      ]
+    },
+    {
+      "source": "Piastri",
+      "target": "Russell",
+      "weight": 2,
+      "gps": [
+        "Austria",
+        "Azerbaiyán"
+      ]
+    },
+    {
+      "source": "Piastri",
+      "target": "Sainz",
+      "weight": 2,
+      "gps": [
+        "Mónaco",
+        "Austria"
+      ]
+    },
+    {
+      "source": "Piastri",
+      "target": "Verstappen",
+      "weight": 2,
+      "gps": [
+        "Singapur",
+        "Catar"
+      ]
+    },
+    {
+      "source": "Pérez",
+      "target": "Sainz",
+      "weight": 2,
+      "gps": [
+        "Baréin",
+        "Japón"
+      ]
+    },
+    {
+      "source": "Pérez",
+      "target": "Verstappen",
+      "weight": 4,
+      "gps": [
+        "Baréin",
+        "Arabia Saudí",
+        "Japón",
+        "China"
+      ]
+    },
+    {
+      "source": "Russell",
+      "target": "Sainz",
+      "weight": 2,
+      "gps": [
+        "Austria",
+        "Las Vegas"
+      ]
+    },
+    {
+      "source": "Russell",
+      "target": "Verstappen",
+      "weight": 1,
+      "gps": [
+        "Canadá"
+      ]
+    },
+    {
+      "source": "Sainz",
+      "target": "Verstappen",
+      "weight": 3,
+      "gps": [
+        "Baréin",
+        "Japón",
+        "Estados Unidos"
+      ]
+    }
+  ],
+  "races": 24
+}
