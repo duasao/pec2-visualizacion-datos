@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Tres técnicas de visualización (pie chart, arc diagram y convex hull) aplicadas a datos reales. PEC2 de Visualización de Datos, UOC.">
+  <title>Inicio · PEC2 Visualización de Datos</title>
+
+  <!-- Tipografías que usa style.css (sin este enlace se ven las del sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Manrope:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="app.js" defer></script>
+</head>
+
+<body data-page="home">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header id="arriba">
+    <div class="wrap topbar">
+      <a class="brand" href="index.html">
+        PEC<span class="brand-accent">2</span>
+        <span class="brand-sep" aria-hidden="true">·</span>
+        Visualizaciones de datos
+      </a>
+
+      <nav class="topnav" aria-label="Secciones">
+        <a href="index.html" class="active" aria-current="page">Inicio</a>
+        <a href="pie-chart.html">Pie Chart</a>
+        <a href="arc-diagram.html">Arc Diagram</a>
+        <a href="convex-hull.html">Convex Hull</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO ===================== -->
+  <main class="wrap" id="contenido">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="titulo">
+      <span class="eyebrow">PEC2 · Técnicas asignadas · UOC</span>
+      <h1 id="titulo">Tres técnicas.<br> Tres formas de ver los datos.</h1>
+      <p class="lead">
+        En esta PEC he trabajado con tres técnicas muy distintas. Para cada una he buscado
+        datos que encajen de verdad, he creado la visualización y he comprobado qué nos permite ver.
+      </p>
+    </section>
+
+    <!-- Tarjetas de las tres visualizaciones -->
+    <section class="grid3" aria-label="Visualizaciones">
+
+      <a class="card" href="pie-chart.html">
+        <div class="cardtop">
+          <svg viewBox="0 0 270 150" aria-hidden="true">
+            <circle cx="135" cy="75" r="58" fill="#e8ecf0"/>
+            <path d="M135 75 L135 17 A58 58 0 0 1 144 132 Z" fill="#2C6F9B"/>
+            <path d="M135 75 L144 132 A58 58 0 0 1 77 88 Z" fill="#D9A052"/>
+            <path d="M135 75 L77 88 A58 58 0 0 1 116 20 Z" fill="#8A72B5"/>
+          </svg>
+        </div>
+        <div class="cardbody">
+          <span class="eyebrow">01 · Composición</span>
+          <h2>Pie Chart</h2>
+          <p>¿Qué modalidades concentran más alumnado de Bachillerato en Cataluña? Datos de 2023–2024.</p>
+          <span class="cardfoot">Ver la visualización →</span>
+        </div>
+      </a>
+
+      <a class="card" href="arc-diagram.html">
+        <div class="cardtop">
+          <svg viewBox="0 0 270 150" aria-hidden="true">
+            <path d="M30 109 C30 -15 235 -15 235 109" fill="none" stroke="#547c9b" stroke-width="3" opacity=".55"/>
+            <path d="M70 109 C70 40 155 40 155 109" fill="none" stroke="#D9A052" stroke-width="3"/>
+            <path d="M115 109 C115 60 205 60 205 109" fill="none" stroke="#547c9b" stroke-width="3"/>
+            <path d="M25 110 H243" stroke="#a1b4bb"/>
+            <g fill="#1e817f">
+              <circle cx="30" cy="109" r="7"/>
+              <circle cx="70" cy="109" r="7"/>
+              <circle cx="115" cy="109" r="7"/>
+              <circle cx="155" cy="109" r="7"/>
+              <circle cx="205" cy="109" r="7"/>
+              <circle cx="235" cy="109" r="7"/>
+            </g>
+          </svg>
+        </div>
+        <div class="cardbody">
+          <span class="eyebrow">02 · Relaciones</span>
+          <h2>Arc Diagram</h2>
+          <p>F1 2024: ¿qué pilotos coincidieron más veces en los podios de los 24 Grandes Premios?</p>
+          <span class="cardfoot">Explorar relaciones →</span>
+        </div>
+      </a>
+
+      <a class="card" href="convex-hull.html">
+        <div class="cardtop">
+          <svg viewBox="0 0 270 150" aria-hidden="true">
+            <polygon points="25,107 45,57 104,63 133,113 95,126" fill="#248c81" fill-opacity=".20" stroke="#248c81" stroke-width="2.5"/>
+            <polygon points="121,114 141,26 201,37 244,98 183,135" fill="#856db2" fill-opacity=".16" stroke="#856db2" stroke-width="2.5"/>
+            <g fill="#248c81">
+              <circle cx="37" cy="102" r="4"/>
+              <circle cx="49" cy="83" r="4"/>
+              <circle cx="81" cy="100" r="4"/>
+              <circle cx="99" cy="68" r="4"/>
+            </g>
+            <g fill="#856db2">
+              <circle cx="163" cy="69" r="4"/>
+              <circle cx="198" cy="81" r="4"/>
+              <circle cx="173" cy="116" r="4"/>
+              <circle cx="222" cy="93" r="4"/>
+            </g>
+          </svg>
+        </div>
+        <div class="cardbody">
+          <span class="eyebrow">03 · Geometría</span>
+          <h2>Convex Hull</h2>
+          <p>32 coches históricos: peso y MPG. Comparo los grupos de 4, 6 y 8 cilindros mediante envolventes.</p>
+          <span class="cardfoot">Ver las envolventes →</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- Lógica del trabajo -->
+    <section class="panel" aria-labelledby="titulo-logica">
+      <div class="sectionhead">
+        <div>
+          <h2 id="titulo-logica">Por qué he elegido estos datos</h2>
+          <p>
+            El punto de partida han sido las tres técnicas asignadas. Después he buscado un conjunto
+            de datos que tenga sentido para cada una: proporciones, conexiones y grupos de puntos.
+            La herramienta viene después, no al revés.
+          </p>
+        </div>
+        <span class="tag">3 técnicas · 3 datasets</span>
+      </div>
+
+      <div class="textgrid">
+        <div>
+          <h3>De dónde salen los datos</h3>
+          <p>
+            He utilizado datos del CTESC para Bachillerato, resultados oficiales de F1 de 2024
+            y el conjunto histórico mtcars de automóviles.
+            En cada visualización indico la fuente y dejo los datos para consultarlos.
+          </p>
+        </div>
+        <div>
+          <h3>Puedes probar las visualizaciones</h3>
+          <p>
+            Los tres gráficos están hechos en SVG y funcionan desde el navegador. Puedes pasar
+            el ratón por los datos, destacar relaciones y cambiar variables sin tener que iniciar sesión.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nota de evaluación -->
+    <section class="panel" aria-labelledby="titulo-evaluacion">
+      <h2 id="titulo-evaluacion">Cómo explorar los gráficos</h2>
+      <p>
+        Entra en una técnica y prueba sus controles. Cada página explica <strong>qué datos he usado</strong>,
+        cómo se transforman en elementos visuales y qué conclusiones podemos sacar sin ir más allá de lo que dicen los datos.
+      </p>
+      <div class="insight">
+        <p class="insight-title">Si quieres comprobarlo</p>
+        <p>
+          Al final de cada visualización encontrarás la fuente original y los datos descargables.
+          Así puedes contrastar los valores y repetir el análisis.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="wrap">
+    <div class="footrow">
+      <span>PEC2 · Visualización de Datos · UOC</span>
+      <a href="#arriba" class="topbtn">↑ Volver arriba</a>
+    </div>
+  </footer>
+</body>
+</html>

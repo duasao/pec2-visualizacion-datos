@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Coches históricos: peso, potencia y MPG, según número de cilindros, con envolventes convexas interactivas.">
+  <title>Convex Hull · PEC2 Visualización de Datos</title>
+
+  <!-- Tipografías que usa style.css (sin este enlace se ven las del sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Manrope:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="app.js" defer></script>
+</head>
+
+<body data-page="hull">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header id="arriba">
+    <div class="wrap topbar">
+      <a class="brand" href="index.html">
+        PEC<span class="brand-accent">2</span>
+        <span class="brand-sep" aria-hidden="true">·</span>
+        Visualizaciones de datos
+      </a>
+
+      <nav class="topnav" aria-label="Secciones">
+        <a href="index.html">Inicio</a>
+        <a href="pie-chart.html">Pie Chart</a>
+        <a href="arc-diagram.html">Arc Diagram</a>
+        <a href="convex-hull.html" class="active" aria-current="page">Convex Hull</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO ===================== -->
+  <main class="wrap" id="contenido">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="titulo">
+      <span class="eyebrow">03 · Geometría · Ingeniería del automóvil</span>
+      <h1 id="titulo">Convex Hull</h1>
+      <p class="lead">He escogido coches porque quería ver cómo se relacionan <strong>el peso y el rendimiento de combustible</strong>. Las envolventes convexas ayudan a comparar hasta dónde llegan los vehículos de cada grupo.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="titulo-grafico">
+      <div class="sectionhead">
+        <div>
+          <h2 id="titulo-grafico">¿Qué pasa con el consumo cuando cambia el peso?</h2>
+          <p>Cada punto representa un modelo de coche. Los colores distinguen motores de 4, 6 y 8 cilindros. Los polígonos rodean los <strong>puntos extremos</strong> de cada grupo; no son una media ni una zona de confianza.</p>
+        </div>
+        <span class="tag">Dispersión · Envolventes</span>
+      </div>
+      <div class="metricbar">
+        <div class="metric"><strong>32</strong><span>Modelos de coche</span></div>
+        <div class="metric"><strong>3</strong><span>Grupos por cilindros</span></div>
+        <div class="metric"><strong>1973–74</strong><span>Modelos históricos</span></div>
+      </div>
+      <div class="controlbar">
+        <label for="hullView">Variables</label>
+        <select id="hullView">
+          <option value="weight_kg,mpg">Peso (kg) × rendimiento (MPG)</option>
+          <option value="hp,mpg">Potencia (hp) × rendimiento (MPG)</option>
+        </select>
+        <label class="checklabel" for="hullToggle"><input id="hullToggle" type="checkbox" checked> Mostrar envolventes</label>
+      </div>
+      <div class="plot-stage" id="plotStage">
+        <svg id="hullSvg" viewBox="0 0 1070 590" role="group" aria-label="Gráfico de dispersión interactivo: peso o potencia frente a MPG, agrupado por cilindrada en número de cilindros. Envolventes convexas para cada grupo."></svg>
+        <div id="tooltip" class="tooltip" aria-hidden="true"></div>
+      </div>
+      <ul class="hull-legend" aria-label="Categorías">
+        <li><span class="swatch" style="background:var(--cyl4)"></span> 4 cilindros (11)</li>
+        <li><span class="swatch" style="background:var(--cyl6)"></span> 6 cilindros (7)</li>
+        <li><span class="swatch" style="background:var(--cyl8)"></span> 8 cilindros (14)</li>
+      </ul>
+      <p class="mini" id="hullStatus" aria-live="polite"></p>
+      <div class="insight">
+        <p class="insight-title">Fíjate en esto</p>
+        <p id="hullInsight" aria-live="polite">Los coches más pesados tienden a tener menos MPG. Aun así, la envolvente es sensible a los modelos extremos.</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="titulo-analisis">
+      <h2 id="titulo-analisis">Qué representa y qué debemos tener en cuenta</h2>
+      <div class="textgrid">
+        <div>
+          <h3>Datos y funcionamiento</h3>
+          <p>Utilizo <strong>mtcars</strong>, un conjunto histórico de 32 modelos. El peso, la potencia y las millas por galón (<strong>MPG</strong>) son medidas cuantitativas; el número de cilindros (4, 6 u 8) define tres categorías. El archivo está organizado en <strong>filas por vehículo y columnas por variable</strong>.</p>
+          <p>Primero sitúo cada coche en un plano con dos ejes cuantitativos. Después, para cada grupo, calculo el <strong>polígono convexo más pequeño</strong> que incluye todos sus puntos. Los vértices son observaciones extremas, y el relleno solo ayuda a identificar cada grupo.</p>
+          <p>He usado el algoritmo de <strong>cadena monótona de Andrew</strong>, habitual en geometría computacional, para obtener los vértices. Necesitamos al menos <strong>tres puntos no alineados</strong> por grupo para dibujar un polígono en 2D. El cálculo es O(n log n) por grupo. <a href="https://www.sciencedirect.com/science/article/abs/pii/0020019079900723" target="_blank" rel="noopener">Referencia original de Andrew ↗</a>.</p>
+        </div>
+        <div>
+          <h3>Hallazgos y límites</h3>
+          <p>En estos 32 coches, los de <strong>4 cilindros</strong> tienen una media aproximada de <strong>26,7 MPG</strong>, y los de <strong>8 cilindros</strong>, de <strong>15,1 MPG</strong>. Es una diferencia descriptiva en esta muestra, no una ley general de los motores.</p>
+          <p><strong>MPG significa millas por galón estadounidense:</strong> cuanto mayor es el valor, más distancia se recorre con la misma cantidad de combustible. No equivale a litros/100 km, que se interpreta al revés.</p>
+          <p>Una Convex Hull <strong>no mide densidad</strong> ni da probabilidades. Un solo coche muy extremo puede agrandar mucho el polígono, aunque el resto esté concentrado en otra zona. Con muchas observaciones se amontonan los puntos, pero el algoritmo sigue funcionando; para estudiar concentración sería mejor una curva de densidad o un mapa de calor.</p>
+          <p>Esta visualización puede ser útil para alumnado de ingeniería o personas interesadas en automoción. Los datos son históricos y <strong>no sirven para caracterizar todos los coches modernos</strong> ni para demostrar causalidad.</p>
+        </div>
+      </div>
+      <div class="sourcebox">
+        <h3>Fuente y clasificación de la técnica</h3>
+        <p><strong>Datos:</strong> <em>Motor Trend Car Road Tests</em> (<strong>mtcars</strong>), 32 automóviles de 1973–1974; fuente reproducida en el paquete base <strong>datasets</strong> de R. La columna original <code>wt</code> está expresada en miles de libras; la he convertido a kg con <code>wt × 1000 × 0,45359237</code>. <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html" target="_blank" rel="noopener">Documentación oficial de R ↗</a>.</p>
+        <p><strong>Técnica:</strong> envolvente convexa, una construcción de geometría computacional sobre un conjunto de puntos. Se combina con un <strong>diagrama de dispersión</strong> para comparar regiones ocupadas por grupos. La función es explorar <strong>rangos observados y solapamientos</strong>; no es un gráfico de composición ni una clasificación probabilística.</p>
+        <p><strong>Clasificación comparada:</strong> en <a href="https://datavizcatalogue.com/methods/scatterplot.html" target="_blank" rel="noopener">Data Viz Catalogue ↗</a>, el diagrama de dispersión se utiliza para estudiar relaciones y patrones entre variables. La <em>Convex Hull</em> que añado encima es una construcción geométrica, no un gráfico de composición ni una técnica que todos los catálogos clasifiquen por separado.</p>
+        <p><strong>Otros usos:</strong> delimitar puntos geográficos, analizar posiciones de robots o describir fronteras de muestras en un plano de características. Para grupos con formas cóncavas, un polígono convexo puede incluir áreas sin observaciones; para evitarlo existen otras técnicas, como alpha shapes, pero responden a un criterio geométrico distinto.</p>
+        <p><a href="data/coches-mtcars-32.csv" download>Descargar los 32 vehículos (CSV)</a>.</p>
+      </div>
+    </section>
+
+    <!-- Datos que lee app.js (copia de data/*.json, para que funcione también sin servidor) -->
+    <script type="application/json" id="dataset">
+{
+  "rows": [
+    {
+      "id": 1,
+      "name": "Mazda RX4",
+      "weight_kg": 1188.4,
+      "weight_1000_lbs": 2.62,
+      "mpg": 21.0,
+      "hp": 110,
+      "cyl": "6"
+    },
+    {
+      "id": 2,
+      "name": "Mazda RX4 Wag",
+      "weight_kg": 1304.1,
+      "weight_1000_lbs": 2.875,
+      "mpg": 21.0,
+      "hp": 110,
+      "cyl": "6"
+    },
+    {
+      "id": 3,
+      "name": "Datsun 710",
+      "weight_kg": 1052.3,
+      "weight_1000_lbs": 2.32,
+      "mpg": 22.8,
+      "hp": 93,
+      "cyl": "4"
+    },
+    {
+      "id": 4,
+      "name": "Hornet 4 Drive",
+      "weight_kg": 1458.3,
+      "weight_1000_lbs": 3.215,
+      "mpg": 21.4,
+      "hp": 110,
+      "cyl": "6"
+    },
+    {
+      "id": 5,
+      "name": "Hornet Sportabout",
+      "weight_kg": 1560.4,
+      "weight_1000_lbs": 3.44,
+      "mpg": 18.7,
+      "hp": 175,
+      "cyl": "8"
+    },
+    {
+      "id": 6,
+      "name": "Valiant",
+      "weight_kg": 1569.4,
+      "weight_1000_lbs": 3.46,
+      "mpg": 18.1,
+      "hp": 105,
+      "cyl": "6"
+    },
+    {
+      "id": 7,
+      "name": "Duster 360",
+      "weight_kg": 1619.3,
+      "weight_1000_lbs": 3.57,
+      "mpg": 14.3,
+      "hp": 245,
+      "cyl": "8"
+    },
+    {
+      "id": 8,
+      "name": "Merc 240D",
+      "weight_kg": 1447.0,
+      "weight_1000_lbs": 3.19,
+      "mpg": 24.4,
+      "hp": 62,
+      "cyl": "4"
+    },
+    {
+      "id": 9,
+      "name": "Merc 230",
+      "weight_kg": 1428.8,
+      "weight_1000_lbs": 3.15,
+      "mpg": 22.8,
+      "hp": 95,
+      "cyl": "4"
+    },
+    {
+      "id": 10,
+      "name": "Merc 280",
+      "weight_kg": 1560.4,
+      "weight_1000_lbs": 3.44,
+      "mpg": 19.2,
+      "hp": 123,
+      "cyl": "6"
+    },
+    {
+      "id": 11,
+      "name": "Merc 280C",
+      "weight_kg": 1560.4,
+      "weight_1000_lbs": 3.44,
+      "mpg": 17.8,
+      "hp": 123,
+      "cyl": "6"
+    },
+    {
+      "id": 12,
+      "name": "Merc 450SE",
+      "weight_kg": 1846.1,
+      "weight_1000_lbs": 4.07,
+      "mpg": 16.4,
+      "hp": 180,
+      "cyl": "8"
+    },
+    {
+      "id": 13,
+      "name": "Merc 450SL",
+      "weight_kg": 1691.9,
+      "weight_1000_lbs": 3.73,
+      "mpg": 17.3,
+      "hp": 180,
+      "cyl": "8"
+    },
+    {
+      "id": 14,
+      "name": "Merc 450SLC",
+      "weight_kg": 1714.6,
+      "weight_1000_lbs": 3.78,
+      "mpg": 15.2,
+      "hp": 180,
+      "cyl": "8"
+    },
+    {
+      "id": 15,
+      "name": "Cadillac Fleetwood",
+      "weight_kg": 2381.4,
+      "weight_1000_lbs": 5.25,
+      "mpg": 10.4,
+      "hp": 205,
+      "cyl": "8"
+    },
+    {
+      "id": 16,
+      "name": "Lincoln Continental",
+      "weight_kg": 2460.3,
+      "weight_1000_lbs": 5.424,
+      "mpg": 10.4,
+      "hp": 215,
+      "cyl": "8"
+    },
+    {
+      "id": 17,
+      "name": "Chrysler Imperial",
+      "weight_kg": 2424.5,
+      "weight_1000_lbs": 5.345,
+      "mpg": 14.7,
+      "hp": 230,
+      "cyl": "8"
+    },
+    {
+      "id": 18,
+      "name": "Fiat 128",
+      "weight_kg": 997.9,
+      "weight_1000_lbs": 2.2,
+      "mpg": 32.4,
+      "hp": 66,
+      "cyl": "4"
+    },
+    {
+      "id": 19,
+      "name": "Honda Civic",
+      "weight_kg": 732.6,
+      "weight_1000_lbs": 1.615,
+      "mpg": 30.4,
+      "hp": 52,
+      "cyl": "4"
+    },
+    {
+      "id": 20,
+      "name": "Toyota Corolla",
+      "weight_kg": 832.3,
+      "weight_1000_lbs": 1.835,
+      "mpg": 33.9,
+      "hp": 65,
+      "cyl": "4"
+    },
+    {
+      "id": 21,
+      "name": "Toyota Corona",
+      "weight_kg": 1118.1,
+      "weight_1000_lbs": 2.465,
+      "mpg": 21.5,
+      "hp": 97,
+      "cyl": "4"
+    },
+    {
+      "id": 22,
+      "name": "Dodge Challenger",
+      "weight_kg": 1596.6,
+      "weight_1000_lbs": 3.52,
+      "mpg": 15.5,
+      "hp": 150,
+      "cyl": "8"
+    },
+    {
+      "id": 23,
+      "name": "AMC Javelin",
+      "weight_kg": 1558.1,
+      "weight_1000_lbs": 3.435,
+      "mpg": 15.2,
+      "hp": 150,
+      "cyl": "8"
+    },
+    {
+      "id": 24,
+      "name": "Camaro Z28",
+      "weight_kg": 1741.8,
+      "weight_1000_lbs": 3.84,
+      "mpg": 13.3,
+      "hp": 245,
+      "cyl": "8"
+    },
+    {
+      "id": 25,
+      "name": "Pontiac Firebird",
+      "weight_kg": 1744.1,
+      "weight_1000_lbs": 3.845,
+      "mpg": 19.2,
+      "hp": 175,
+      "cyl": "8"
+    },
+    {
+      "id": 26,
+      "name": "Fiat X1-9",
+      "weight_kg": 877.7,
+      "weight_1000_lbs": 1.935,
+      "mpg": 27.3,
+      "hp": 66,
+      "cyl": "4"
+    },
+    {
+      "id": 27,
+      "name": "Porsche 914-2",
+      "weight_kg": 970.7,
+      "weight_1000_lbs": 2.14,
+      "mpg": 26.0,
+      "hp": 91,
+      "cyl": "4"
+    },
+    {
+      "id": 28,
+      "name": "Lotus Europa",
+      "weight_kg": 686.3,
+      "weight_1000_lbs": 1.513,
+      "mpg": 30.4,
+      "hp": 113,
+      "cyl": "4"
+    },
+    {
+      "id": 29,
+      "name": "Ford Pantera L",
+      "weight_kg": 1437.9,
+      "weight_1000_lbs": 3.17,
+      "mpg": 15.8,
+      "hp": 264,
+      "cyl": "8"
+    },
+    {
+      "id": 30,
+      "name": "Ferrari Dino",
+      "weight_kg": 1256.5,
+      "weight_1000_lbs": 2.77,
+      "mpg": 19.7,
+      "hp": 175,
+      "cyl": "6"
+    },
+    {
+      "id": 31,
+      "name": "Maserati Bora",
+      "weight_kg": 1619.3,
+      "weight_1000_lbs": 3.57,
+      "mpg": 15.0,
+      "hp": 335,
+      "cyl": "8"
+    },
+    {
+      "id": 32,
+      "name": "Volvo 142E",
+      "weight_kg": 1261.0,
+      "weight_1000_lbs": 2.78,
+      "mpg": 21.4,
+      "hp": 109,
+      "cyl": "4"
+    }
+  ]
+}
+    </script>
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="wrap">
+    <div class="footrow">
+      <span>PEC2 · Visualización de Datos · UOC</span>
+      <a href="index.html" class="topbtn">← Volver al inicio</a>
+    </div>
+  </footer>
+</body>
+</html>

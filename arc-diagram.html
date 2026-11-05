@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Fórmula 1 2024: red interactiva de coincidencias entre pilotos en los podios; Arc Diagram.">
+  <title>Arc Diagram · PEC2 Visualización de Datos</title>
+
+  <!-- Tipografías que usa style.css (sin este enlace se ven las del sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Manrope:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="app.js" defer></script>
+</head>
+
+<body data-page="arc">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header id="arriba">
+    <div class="wrap topbar">
+      <a class="brand" href="index.html">
+        PEC<span class="brand-accent">2</span>
+        <span class="brand-sep" aria-hidden="true">·</span>
+        Visualizaciones de datos
+      </a>
+
+      <nav class="topnav" aria-label="Secciones">
+        <a href="index.html">Inicio</a>
+        <a href="pie-chart.html">Pie Chart</a>
+        <a href="arc-diagram.html" class="active" aria-current="page">Arc Diagram</a>
+        <a href="convex-hull.html">Convex Hull</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO ===================== -->
+  <main class="wrap" id="contenido">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="titulo">
+      <span class="eyebrow">02 · Relaciones · Fórmula 1</span>
+      <h1 id="titulo">Arc Diagram</h1>
+      <p class="lead">He elegido los podios de Fórmula 1 de 2024 porque quería responder una pregunta diferente de quién ganó más carreras: <strong>¿qué pilotos coincidieron más veces entre los tres primeros?</strong></p>
+    </section>
+
+    <section class="panel" aria-labelledby="titulo-grafico">
+      <div class="sectionhead">
+        <div>
+          <h2 id="titulo-grafico">¿Qué pilotos compartieron más podios?</h2>
+          <p>Cada punto es un piloto. Los arcos unen a dos pilotos que subieron al mismo podio. Cuanto más grueso es el arco, más Grandes Premios compartieron. No estamos comparando sus puntos del Mundial.</p>
+        </div>
+        <span class="tag">Red · Coincidencias</span>
+      </div>
+      <div class="metricbar">
+        <div class="metric"><strong>24</strong><span>Grandes Premios</span></div>
+        <div class="metric"><strong>10</strong><span>Pilotos con podio</span></div>
+        <div class="metric"><strong id="arcUnique">—</strong><span>Parejas diferentes</span></div>
+      </div>
+      <div class="controlbar">
+        <label for="arcSize">Pilotos</label>
+        <select id="arcSize"><option value="7">7 más habituales</option><option value="10">Los 10 del año</option></select>
+        <label for="arcOrder">Orden</label>
+        <select id="arcOrder"><option value="strength">Más podios primero</option><option value="team">Por escudería</option><option value="alpha">Alfabético</option></select>
+        <label for="arcWeight">Coincidencias mínimas</label>
+        <input id="arcWeight" type="range" min="1" max="8" step="1" value="2">
+        <output id="weightVal" for="arcWeight">2</output>
+        <button id="arcReset" type="button">Quitar selección</button>
+      </div>
+      <div class="plot-stage" id="plotStage">
+        <svg id="arcSvg" viewBox="0 0 1280 560" role="group" aria-label="Red de los pilotos que compartieron podio en Fórmula 1 en 2024. Selecciona un piloto para ver sus conexiones."></svg>
+        <div id="tooltip" class="tooltip" aria-hidden="true"></div>
+      </div>
+      <p class="info" id="arcSummary" aria-live="polite"></p>
+      <p class="mini" id="arcStatus" aria-live="polite"></p>
+      <div class="insight">
+        <p class="insight-title">Prueba esto</p>
+        <p>Haz clic en <strong>Verstappen</strong> o <strong>Norris</strong> para destacar con quién coincidieron. Luego cambia a los 10 pilotos y baja la frecuencia mínima a 1: se ven más relaciones, pero también se empieza a acumular ruido visual. Puedes ordenar la red por escudería para comparar otra disposición.</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="titulo-analisis">
+      <h2 id="titulo-analisis">Qué nos cuenta este diagrama y dónde falla</h2>
+      <div class="textgrid">
+        <div>
+          <h3>Los datos que necesita</h3>
+          <p>Esta técnica trabaja con <strong>datos relacionales</strong>. Tengo una tabla de pilotos, que son los <strong>nodos</strong>, y otra con parejas de pilotos, que son las <strong>aristas</strong>. Cada arista tiene un peso cuantitativo discreto: el número de podios compartidos. Los pilotos y las escuderías son categorías nominales.</p>
+          <p>De los 24 resultados he tomado los tres primeros en cada carrera. Cada podio genera exactamente tres parejas, y sumo cuántas veces se repite cada una. La red es <strong>no dirigida y ponderada</strong>: compartir un podio es una relación simétrica.</p>
+          <p>He colocado los nodos en una línea, los arcos muestran las conexiones y el <strong>grosor</strong> señala su frecuencia. La <strong>altura</strong> del arco solo depende de lo separados que estén sus dos pilotos en la línea: no indica más coincidencias.</p>
+        </div>
+        <div>
+          <h3>Lo que descubro y sus límites</h3>
+          <p>En 2024, Verstappen estuvo en <strong>14</strong> podios, mientras que Norris y Leclerc estuvieron en <strong>13</strong> cada uno. Pero la pregunta de este gráfico no es cuántos podios consiguieron por separado, sino <strong>qué parejas se repiten</strong>. La pareja que más se repite es <strong>Norris–Verstappen, con 8 podios compartidos</strong>; después viene <strong>Leclerc–Norris, con 7</strong>. Eso es lo que revela el grosor de los arcos.</p>
+          <p>La red tiene solo diez nodos: es manejable. Aun así, con muchas aristas los arcos se superponen. <strong>No existe un máximo fijo</strong>: depende de la densidad, las etiquetas y el orden. Por eso incluyo filtros y varias formas de ordenar. Con redes densas podría funcionar mejor una <strong>matriz de adyacencia</strong>.</p>
+          <p>Me dirijo a aficionados, periodistas y analistas de F1. Estar conectado aquí <strong>no significa</strong> ser compañero de equipo, tener más victorias o causar los resultados del otro piloto.</p>
+        </div>
+      </div>
+      <div class="sourcebox">
+        <h3>Fuente, clasificación y antecedentes</h3>
+        <p><strong>Datos:</strong> clasificación de las 24 carreras del Campeonato del Mundo de Fórmula 1 de 2024, puestos 1.º, 2.º y 3.º, sin incluir sprints. Transcripción y recuento de parejas propios a partir del <a href="https://www.formula1.com/en/racing/2024" target="_blank" rel="noopener">calendario y podios oficiales de F1 ↗</a>. Puedes contrastar cada pareja con el archivo de las 24 carreras.</p>
+        <p><strong>Técnica:</strong> diagrama de red de relaciones. <strong>Martin Wattenberg</strong> presentó los Arc Diagrams en 2002 para visualizar repeticiones en secuencias; aquí uso la aplicación a redes. <a href="https://research.ibm.com/publications/arc-diagrams-visualizing-structure-in-strings" target="_blank" rel="noopener">Artículo de 2002 ↗</a> · <a href="https://datavizcatalogue.com/methods/arc_diagram.html" target="_blank" rel="noopener">Data Viz Catalogue: patrones/relaciones ↗</a> · <a href="https://www.data-to-viz.com/graph/arc.html" target="_blank" rel="noopener">From Data to Viz: redes ↗</a>.</p>
+        <p><strong>Otros usos:</strong> colaboraciones entre científicos, coapariciones de personajes o conexiones entre aeropuertos.</p>
+        <p><a href="data/f1-2024-podios.csv" download>Podios de las 24 carreras (CSV)</a> · <a href="data/f1-2024-relaciones.csv" download>Parejas y frecuencias (CSV)</a> · <a href="data/f1-2024-pilotos.csv" download>Pilotos (CSV)</a></p>
+      </div>
+    </section>
+
+    <!-- Datos que lee app.js (copia de data/*.json, para que funcione también sin servidor) -->
+    <script type="application/json" id="dataset">
+{
+  "nodes": [
+    {
+      "id": "Verstappen",
+      "nombre": "Max Verstappen",
+      "team": "Red Bull",
+      "podios": 14,
+      "grado": 9,
+      "fuerza": 28
+    },
+    {
+      "id": "Pérez",
+      "nombre": "Sergio Pérez",
+      "team": "Red Bull",
+      "podios": 4,
+      "grado": 4,
+      "fuerza": 8
+    },
+    {
+      "id": "Sainz",
+      "nombre": "Carlos Sainz",
+      "team": "Ferrari",
+      "podios": 9,
+      "grado": 7,
+      "fuerza": 18
+    },
+    {
+      "id": "Leclerc",
+      "nombre": "Charles Leclerc",
+      "team": "Ferrari",
+      "podios": 13,
+      "grado": 7,
+      "fuerza": 26
+    },
+    {
+      "id": "Norris",
+      "nombre": "Lando Norris",
+      "team": "McLaren",
+      "podios": 13,
+      "grado": 7,
+      "fuerza": 26
+    },
+    {
+      "id": "Piastri",
+      "nombre": "Oscar Piastri",
+      "team": "McLaren",
+      "podios": 8,
+      "grado": 6,
+      "fuerza": 16
+    },
+    {
+      "id": "Russell",
+      "nombre": "George Russell",
+      "team": "Mercedes",
+      "podios": 4,
+      "grado": 6,
+      "fuerza": 8
+    },
+    {
+      "id": "Hamilton",
+      "nombre": "Lewis Hamilton",
+      "team": "Mercedes",
+      "podios": 5,
+      "grado": 6,
+      "fuerza": 10
+    },
+    {
+      "id": "Ocon",
+      "nombre": "Esteban Ocon",
+      "team": "Alpine",
+      "podios": 1,
+      "grado": 2,
+      "fuerza": 2
+    },
+    {
+      "id": "Gasly",
+      "nombre": "Pierre Gasly",
+      "team": "Alpine",
+      "podios": 1,
+      "grado": 2,
+      "fuerza": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "Gasly",
+      "target": "Ocon",
+      "weight": 1,
+      "gps": [
+        "São Paulo"
+      ]
+    },
+    {
+      "source": "Gasly",
+      "target": "Verstappen",
+      "weight": 1,
+      "gps": [
+        "São Paulo"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Leclerc",
+      "weight": 1,
+      "gps": [
+        "Bélgica"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Norris",
+      "weight": 3,
+      "gps": [
+        "España",
+        "Gran Bretaña",
+        "Hungría"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Piastri",
+      "weight": 2,
+      "gps": [
+        "Hungría",
+        "Bélgica"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Russell",
+      "weight": 1,
+      "gps": [
+        "Las Vegas"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Sainz",
+      "weight": 1,
+      "gps": [
+        "Las Vegas"
+      ]
+    },
+    {
+      "source": "Hamilton",
+      "target": "Verstappen",
+      "weight": 2,
+      "gps": [
+        "España",
+        "Gran Bretaña"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Norris",
+      "weight": 7,
+      "gps": [
+        "Australia",
+        "Miami",
+        "Emilia-Romaña",
+        "Países Bajos",
+        "Italia",
+        "México",
+        "Abu Dabi"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Piastri",
+      "weight": 5,
+      "gps": [
+        "Mónaco",
+        "Bélgica",
+        "Italia",
+        "Azerbaiyán",
+        "Catar"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Pérez",
+      "weight": 1,
+      "gps": [
+        "Arabia Saudí"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Russell",
+      "weight": 1,
+      "gps": [
+        "Azerbaiyán"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Sainz",
+      "weight": 5,
+      "gps": [
+        "Australia",
+        "Mónaco",
+        "Estados Unidos",
+        "México",
+        "Abu Dabi"
+      ]
+    },
+    {
+      "source": "Leclerc",
+      "target": "Verstappen",
+      "weight": 6,
+      "gps": [
+        "Arabia Saudí",
+        "Miami",
+        "Emilia-Romaña",
+        "Países Bajos",
+        "Estados Unidos",
+        "Catar"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Piastri",
+      "weight": 3,
+      "gps": [
+        "Hungría",
+        "Italia",
+        "Singapur"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Pérez",
+      "weight": 1,
+      "gps": [
+        "China"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Russell",
+      "weight": 1,
+      "gps": [
+        "Canadá"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Sainz",
+      "weight": 3,
+      "gps": [
+        "Australia",
+        "México",
+        "Abu Dabi"
+      ]
+    },
+    {
+      "source": "Norris",
+      "target": "Verstappen",
+      "weight": 8,
+      "gps": [
+        "China",
+        "Miami",
+        "Emilia-Romaña",
+        "Canadá",
+        "España",
+        "Gran Bretaña",
+        "Países Bajos",
+        "Singapur"
+      ]
+    },
+    {
+      "source": "Ocon",
+      "target": "Verstappen",
+      "weight": 1,
+      "gps": [
+        "São Paulo"
+      ]
+    },
+    {
+      "source": "Piastri",
+      "target": "Russell",
+      "weight": 2,
+      "gps": [
+        "Austria",
+        "Azerbaiyán"
+      ]
+    },
+    {
+      "source": "Piastri",
+      "target": "Sainz",
+      "weight": 2,
+      "gps": [
+        "Mónaco",
+        "Austria"
+      ]
+    },
+    {
+      "source": "Piastri",
+      "target": "Verstappen",
+      "weight": 2,
+      "gps": [
+        "Singapur",
+        "Catar"
+      ]
+    },
+    {
+      "source": "Pérez",
+      "target": "Sainz",
+      "weight": 2,
+      "gps": [
+        "Baréin",
+        "Japón"
+      ]
+    },
+    {
+      "source": "Pérez",
+      "target": "Verstappen",
+      "weight": 4,
+      "gps": [
+        "Baréin",
+        "Arabia Saudí",
+        "Japón",
+        "China"
+      ]
+    },
+    {
+      "source": "Russell",
+      "target": "Sainz",
+      "weight": 2,
+      "gps": [
+        "Austria",
+        "Las Vegas"
+      ]
+    },
+    {
+      "source": "Russell",
+      "target": "Verstappen",
+      "weight": 1,
+      "gps": [
+        "Canadá"
+      ]
+    },
+    {
+      "source": "Sainz",
+      "target": "Verstappen",
+      "weight": 3,
+      "gps": [
+        "Baréin",
+        "Japón",
+        "Estados Unidos"
+      ]
+    }
+  ],
+  "races": 24
+}
+    </script>
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="wrap">
+    <div class="footrow">
+      <span>PEC2 · Visualización de Datos · UOC</span>
+      <a href="index.html" class="topbtn">← Volver al inicio</a>
+    </div>
+  </footer>
+</body>
+</html>

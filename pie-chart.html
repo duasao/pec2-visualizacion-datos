@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Distribución del alumnado de Bachillerato presencial de Cataluña por modalidad, curso 2023–2024 (fuente: CTESC).">
+  <title>Pie Chart · PEC2 Visualización de Datos</title>
+
+  <!-- Tipografías que usa style.css (sin este enlace se ven las del sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Manrope:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="app.js" defer></script>
+</head>
+
+<body data-page="pie">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header id="arriba">
+    <div class="wrap topbar">
+      <a class="brand" href="index.html">
+        PEC<span class="brand-accent">2</span>
+        <span class="brand-sep" aria-hidden="true">·</span>
+        Visualizaciones de datos
+      </a>
+
+      <nav class="topnav" aria-label="Secciones">
+        <a href="index.html">Inicio</a>
+        <a href="pie-chart.html" class="active" aria-current="page">Pie Chart</a>
+        <a href="arc-diagram.html">Arc Diagram</a>
+        <a href="convex-hull.html">Convex Hull</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO ===================== -->
+  <main class="wrap" id="contenido">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="titulo">
+      <span class="eyebrow">01 · Composición · Cataluña</span>
+      <h1 id="titulo">Pie Chart</h1>
+      <p class="lead">
+        He escogido el alumnado de Bachillerato presencial en Cataluña para responder a una
+        pregunta sencilla: ¿qué peso tiene cada modalidad? Fuente: CTESC, curso 2023–2024.
+      </p>
+    </section>
+
+    <!-- Gráfico -->
+    <section class="panel" aria-labelledby="titulo-grafico">
+      <div class="sectionhead">
+        <div>
+          <h2 id="titulo-grafico">¿Cómo se reparte el alumnado entre modalidades?</h2>
+          <p>
+            Tenemos 100.310 alumnos repartidos entre cuatro modalidades. Cada sector muestra
+            qué parte del total representa una modalidad. Ojo: estamos viendo un solo curso,
+            no cómo han cambiado las matrículas con el tiempo.
+          </p>
+        </div>
+        <span class="tag">Parte de un todo</span>
+      </div>
+
+      <div class="metricbar">
+        <div class="metric"><strong id="total">100.310</strong><span>Alumnos presenciales</span></div>
+        <div class="metric"><strong>4</strong><span>Modalidades oficiales</span></div>
+        <div class="metric"><strong>2023–24</strong><span>Curso académico</span></div>
+      </div>
+
+      <figure class="plot-stage pie-stage" id="plotStage">
+        <!-- Los sectores son decorativos para el lector de pantalla: la leyenda (botones) es la vía accesible -->
+        <svg id="pieSvg" class="pie-svg" viewBox="0 0 510 430" role="img" aria-labelledby="pieTitle pieDesc">
+          <title id="pieTitle">Distribución del alumnado presencial por modalidad de Bachillerato</title>
+          <desc id="pieDesc">
+            Ciencias y tecnología 47,55 %, Humanidades y ciencias sociales 44,92 %,
+            Artes 7,32 % y General 0,21 %, sobre un total de 100.310 alumnos.
+          </desc>
+        </svg>
+
+        <div id="pieLegend" class="legend" role="group" aria-label="Leyenda: pulsa una modalidad para destacarla"></div>
+        <div id="tooltip" class="tooltip" aria-hidden="true"></div>
+      </figure>
+
+      <!-- Alternativa accesible y sin JavaScript al gráfico -->
+      <details class="datatable">
+        <summary>Ver los datos en tabla</summary>
+        <div class="table-scroll">
+          <table>
+            <caption>Alumnado de Bachillerato presencial por modalidad, Cataluña, 2023–2024</caption>
+            <thead>
+              <tr>
+                <th scope="col">Modalidad</th>
+                <th scope="col" class="num">Alumnos</th>
+                <th scope="col" class="num">Porcentaje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Ciencias y tecnología</th>           <td class="num">47.697</td><td class="num">47,55&nbsp;%</td></tr>
+              <tr><th scope="row">Humanidades y ciencias sociales</th> <td class="num">45.064</td><td class="num">44,92&nbsp;%</td></tr>
+              <tr><th scope="row">Artes</th>                           <td class="num">7.340</td> <td class="num">7,32&nbsp;%</td></tr>
+              <tr><th scope="row">General</th>                         <td class="num">209</td>   <td class="num">0,21&nbsp;%</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><th scope="row">Total</th><td class="num">100.310</td><td class="num">100&nbsp;%</td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </details>
+
+      <div class="insight">
+        <p class="insight-title">Lo que me llama la atención</p>
+        <p>
+          Ciencias y tecnología (47,55&nbsp;%) y Humanidades y ciencias sociales (44,92&nbsp;%)
+          reúnen entre las dos el 92,47&nbsp;% del alumnado. En cambio, la modalidad General
+          representa un 0,21&nbsp;%. Fíjate: su sector casi ni se ve. Ahí aparece una limitación del gráfico circular.
+        </p>
+      </div>
+    </section>
+
+    <!-- Análisis -->
+    <section class="panel" aria-labelledby="titulo-analisis">
+      <h2 id="titulo-analisis">Por qué tiene sentido aquí y dónde falla</h2>
+
+      <div class="textgrid">
+        <div>
+          <h3>Qué datos necesita y cómo los representa</h3>
+          <p>
+            La <strong>modalidad</strong> es una variable cualitativa nominal y el número de alumnos
+            es una medida cuantitativa discreta. El gráfico convierte cada cantidad en una parte
+            del círculo: <code>ángulo = 360° × alumnos de la modalidad / total</code>.
+            Como cada alumno pertenece a una modalidad, las cuatro partes suman el 100&nbsp;%.
+          </p>
+          <p>
+            William Playfair publicó uno de los primeros gráficos circulares en 1801.
+            Es una técnica de <strong>composición o parte de un todo</strong>.
+            También serviría, por ejemplo, para repartir un presupuesto entre partidas excluyentes.
+          </p>
+        </div>
+        <div>
+          <h3>Cuándo deja de ayudar</h3>
+          <p>
+            Con más de cinco o seis categorías suele costar distinguir bien los sectores, aunque
+            no existe un máximo fijo. También falla si las categorías se solapan o no suman un
+            total real. Y cuando los porcentajes son muy parecidos o muy pequeños, prefiero
+            un gráfico de barras: comparar longitudes es más fácil que comparar ángulos.
+          </p>
+          <p>
+            Puede resultar útil a orientadores, equipos directivos y responsables de planificación
+            educativa. Eso sí, el gráfico explica <strong>cómo se reparte</strong> el alumnado,
+            no por qué ha escogido una modalidad u otra.
+          </p>
+        </div>
+      </div>
+
+      <div class="sourcebox">
+        <h3>Los datos y su alcance</h3>
+        <p>
+          <strong><cite lang="ca">CTESC, Memòria socioeconòmica i laboral de Catalunya 2024</cite>,
+          cap. IV, p. 112, nota 101</strong>. Datos del curso <strong>2023–2024</strong>, exclusivamente
+          <strong>Bachillerato presencial</strong>. Cifras absolutas publicadas: Ciencias y tecnología
+          47.697; Humanidades y ciencias sociales 45.064; Artes 7.340; General 209. La suma es 100.310.
+        </p>
+        <p>
+          <a href="https://ctesc.gencat.cat/doc/doc_54639541_1.pdf" target="_blank" rel="noopener">
+            Abrir informe original<span class="visually-hidden"> (PDF, se abre en una pestaña nueva)</span>
+            <span aria-hidden="true">↗</span></a>
+          · <a href="data/bachillerato-modalidades-2023-24.csv" download>Descargar los datos (CSV)</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Datos que lee app.js (copia de data/*.json, para que funcione también sin servidor) -->
+    <script type="application/json" id="dataset">
+    {
+      "total": 100310,
+      "rows": [
+        {"modalidad": "Ciències i tecnologia", "nombre_es": "Ciencias y tecnología", "alumnos": 47697, "color": "#2C6F9B", "porcentaje": 47.5496},
+        {"modalidad": "Humanitats i ciències socials", "nombre_es": "Humanidades y ciencias sociales", "alumnos": 45064, "color": "#D9A052", "porcentaje": 44.9247},
+        {"modalidad": "Arts", "nombre_es": "Artes", "alumnos": 7340, "color": "#8A72B5", "porcentaje": 7.3173},
+        {"modalidad": "General", "nombre_es": "General", "alumnos": 209, "color": "#5A9B8E", "porcentaje": 0.2084}
+      ]
+    }
+    </script>
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="wrap">
+    <div class="footrow">
+      <span>PEC2 · Visualización de Datos · UOC</span>
+      <a href="index.html" class="topbtn">← Volver al inicio</a>
+    </div>
+  </footer>
+</body>
+</html>

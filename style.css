@@ -1,0 +1,843 @@
+/* =============================================================
+   PEC2 · Laboratorio visual — style.css
+   1. Tokens          5. Componentes de contenido
+   2. Base            6. Gráficos (común)
+   3. Utilidades      7. Gráficos (por técnica)
+   4. Layout          8. Responsive y movimiento reducido
+   ============================================================= */
+
+
+/* ---------- 1. Tokens ---------- */
+
+:root {
+  --ink: #162338;
+  --muted: #576679;
+  --navy: #172e49;
+  --line: #dbe4eb;
+  --paper: #f4f7f9;
+  --white: #fff;
+  --teal: #177c79;
+  --shadow: 0 14px 40px rgba(23, 46, 73, .08);
+
+  /* Pie chart (los colores reales vienen del JSON) */
+  --blue: #2C6F9B;
+  --gold: #D9A052;
+  --purple: #8A72B5;
+  --green: #5A9B8E;
+
+  /* Convex hull: app.js lee estas variables */
+  --cyl4: #167b7b;
+  --cyl6: #d29645;
+  --cyl8: #8f6bb2;
+
+  /* Arc diagram */
+  --arc: #46758b;
+  --node: #1f797b;
+
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-head: Manrope, 'DM Sans', system-ui, sans-serif;
+}
+
+
+/* ---------- 2. Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 var(--font-body);
+}
+
+h1, h2, h3,
+.brand,
+.metric strong {
+  font-family: var(--font-head);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 4.25vw, 4.4rem);
+  letter-spacing: -.045em;
+  font-weight: 800;
+  margin: .15em 0 .25em;
+}
+
+h2 {
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  letter-spacing: -.02em;
+  margin: 0 0 .65em;
+}
+
+h3 {
+  font-size: 1.02rem;
+  margin: 0 0 .4rem;
+}
+
+p {
+  margin: 0 0 1.1em;
+}
+
+a {
+  color: #156f8b;
+  text-decoration-color: #9ac5d1;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: #11556d;
+}
+
+:focus-visible {
+  outline: 3px solid #b1d8e0;
+  outline-offset: 2px;
+}
+
+
+/* ---------- 3. Utilidades ---------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 1rem;
+  z-index: 100;
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+
+.skip-link:focus {
+  left: 1rem;
+}
+
+.mini {
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+
+/* ---------- 4. Layout ---------- */
+
+.wrap {
+  width: min(1180px, calc(100% - 44px));
+  margin-inline: auto;
+}
+
+/* Cabecera */
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  min-height: 76px;
+}
+
+.brand {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy);
+  text-decoration: none;
+  letter-spacing: -.03em;
+}
+
+.brand-accent,
+.brand-sep {
+  color: var(--teal);
+}
+
+.topnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topnav a {
+  text-decoration: none;
+  color: #46586a;
+  font-size: .88rem;
+  border-radius: 60px;
+  padding: 8px 13px;
+}
+
+.topnav a.active,
+.topnav a:hover {
+  background: #e9f3f4;
+  color: #176e71;
+}
+
+/* Hero */
+.hero {
+  padding: 64px 0 38px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: var(--teal);
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 790px;
+  font-size: 1.1rem;
+}
+
+/* Paneles */
+.panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 30px;
+  margin-bottom: 24px;
+}
+
+.grid3 + .panel {
+  margin-top: 28px;
+}
+
+.sectionhead {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 22px;
+}
+
+.sectionhead p {
+  color: var(--muted);
+  max-width: 670px;
+  margin-bottom: 0;
+}
+
+.tag {
+  font-size: .72rem;
+  letter-spacing: .09em;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #246f75;
+  background: #e8f4f4;
+  padding: 5px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Tarjetas de portada */
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 44px rgba(23, 46, 73, .13);
+}
+
+.cardtop {
+  height: 190px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #edf4f7, #dcebed);
+}
+
+.cardtop svg {
+  max-width: 87%;
+  height: 150px;
+}
+
+.cardbody {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  flex: 1;
+}
+
+.cardbody h2 {
+  margin: .45rem 0;
+}
+
+.cardbody p {
+  color: var(--muted);
+  font-size: .94rem;
+}
+
+.cardfoot {
+  font-size: .86rem;
+  font-weight: 800;
+  color: var(--teal);
+  margin-top: auto;
+}
+
+/* Pie de página */
+footer {
+  padding: 40px 0 60px;
+  color: #687889;
+  font-size: .88rem;
+}
+
+.footrow {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.topbtn {
+  color: #2b5564;
+  font-weight: 700;
+  font-size: .85rem;
+}
+
+
+/* ---------- 5. Componentes de contenido ---------- */
+
+.metricbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.metricbar + .plot-stage {
+  margin-top: 17px;
+}
+
+.metric {
+  flex: 1;
+  min-width: 145px;
+  background: #f0f5f7;
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+
+.metric strong {
+  display: block;
+  font-size: 1.8rem;
+  letter-spacing: -.04em;
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: .79rem;
+}
+
+.insight {
+  border-left: 4px solid #1e817f;
+  background: #f0f8f7;
+  padding: 18px 22px;
+  border-radius: 0 13px 13px 0;
+  margin: 18px 0;
+}
+
+.insight p:last-child {
+  margin-bottom: 0;
+}
+
+.insight-title {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.textgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.textgrid > div {
+  background: #f8fafb;
+  border: 1px solid #ebf0f3;
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.textgrid p {
+  font-size: .92rem;
+  color: #536477;
+}
+
+.sourcebox {
+  background: #edf3f5;
+  border-radius: 16px;
+  padding: 20px 25px;
+  margin-top: 20px;
+}
+
+.sourcebox h3 {
+  margin-bottom: .5em;
+}
+
+.sourcebox p {
+  font-size: .84rem;
+  color: #475a68;
+  margin: 0 0 .6em;
+}
+
+.sourcebox a {
+  overflow-wrap: anywhere;
+}
+
+/* Tabla de datos desplegable */
+.datatable {
+  margin: 18px 0;
+}
+
+.datatable summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .9rem;
+  color: #2b5564;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.datatable table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  font-size: .9rem;
+}
+
+.datatable caption {
+  text-align: left;
+  color: var(--muted);
+  font-size: .82rem;
+  padding-bottom: 6px;
+}
+
+.datatable th,
+.datatable td {
+  padding: .45rem .6rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.datatable tfoot th,
+.datatable tfoot td {
+  font-weight: 800;
+  border-bottom: 0;
+}
+
+.datatable .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Controles */
+.controlbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12px 0 22px;
+}
+
+.controlbar label {
+  font-size: .82rem;
+  font-weight: 800;
+  color: #4f6070;
+}
+
+.controlbar select,
+.controlbar button {
+  font: inherit;
+  font-size: .86rem;
+  color: #19374b;
+  background: #fff;
+  border: 1px solid #cddce3;
+  border-radius: 10px;
+  padding: 9px 11px;
+}
+
+.controlbar button {
+  cursor: pointer;
+}
+
+.controlbar output {
+  font-size: .82rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.controlbar input {
+  accent-color: var(--teal);
+}
+
+/* Leyenda en píldoras (convex hull) */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  background: #e8eff3;
+  border-radius: 30px;
+  color: #435366;
+  font-weight: 700;
+  font-size: .79rem;
+}
+
+.pill--note {
+  background: transparent;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  border-radius: 5px;
+}
+
+.swatch--setosa { background: var(--setosa); }
+.swatch--versicolor { background: var(--versicolor); }
+.swatch--virginica { background: var(--virginica); }
+
+.info {
+  font-size: .93rem;
+  color: #425366;
+  margin-top: 8px;
+  min-height: 30px;
+}
+
+
+/* ---------- 6. Gráficos (común) ---------- */
+
+.plot-stage {
+  position: relative;
+  margin: 0;
+  min-height: 410px;
+  padding: 12px;
+  background: #fafcfd;
+  border: 1px solid #e6edf2;
+  border-radius: 18px;
+}
+
+.plot-stage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.svg-axis {
+  stroke: #71869b;
+  stroke-width: 1.5;
+}
+
+.svg-grid {
+  stroke: #e8eef2;
+  stroke-width: 1;
+}
+
+.tick {
+  font: 13px var(--font-body);
+  fill: #526579;
+}
+
+.axis-label {
+  font: 600 15px var(--font-body);
+  fill: #3c5263;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 20;
+  display: none;
+  pointer-events: none;
+  min-width: 130px;
+  max-width: 270px;
+  padding: 11px 14px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 9px 20px #10233433;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.tooltip.show {
+  display: block;
+}
+
+.tooltip strong {
+  display: block;
+}
+
+
+/* ---------- 7. Gráficos (por técnica) ---------- */
+
+/* Pie chart */
+.pie-stage {
+  display: grid;
+  grid-template-columns: 1.02fr .98fr;
+  gap: 8px;
+  align-items: center;
+  min-height: 420px;
+}
+
+.legend {
+  display: grid;
+  gap: 12px;
+}
+
+.legendbtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background .16s, border-color .16s;
+}
+
+.legendbtn:hover,
+.legendbtn:focus-visible {
+  background: #eff6f8;
+  border-color: #b7d6df;
+}
+
+.legendbtn[aria-pressed="true"] {
+  background: #e2f0f2;
+  border-color: #81bcc7;
+}
+
+.legendbtn .lname {
+  flex: 1;
+  font-size: .89rem;
+  color: var(--ink);
+}
+
+.legendbtn .lval {
+  text-align: right;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.legendbtn .lval small {
+  display: block;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: .72rem;
+}
+
+.pie-slice {
+  stroke: #fff;
+  stroke-width: 3;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+.pie-slice.dim {
+  opacity: .35;
+}
+
+.pie-slice.active {
+  filter: drop-shadow(0 3px 8px rgba(34, 47, 55, .15));
+}
+
+/* Arc diagram */
+.arc {
+  fill: none;
+  stroke: var(--arc);
+  opacity: .25;
+  transition: opacity .18s;
+}
+
+.arc.is-selected {
+  opacity: .95;
+  stroke: var(--navy);
+}
+
+.arc.is-faded {
+  opacity: .06;
+}
+
+.svg-node {
+  cursor: pointer;
+  transition: opacity .18s;
+}
+
+.svg-node circle {
+  fill: var(--node);
+  stroke: #f9fcfd;
+  stroke-width: 2;
+}
+
+.svg-node text {
+  font: 15px var(--font-body);
+  fill: #344c61;
+}
+
+.is-dense .svg-node text {
+  font-size: 11px;
+}
+
+.svg-node.is-faded {
+  opacity: .25;
+}
+
+.svg-node.is-selected circle,
+.svg-node:focus-visible circle {
+  stroke: var(--navy);
+  stroke-width: 3;
+}
+
+.svg-node:focus-visible {
+  outline: none;
+}
+
+.svg-node:focus-visible text {
+  font-weight: 700;
+  fill: var(--navy);
+}
+
+/* Convex hull */
+.hull-poly {
+  fill-opacity: .13;
+  stroke-width: 3;
+  pointer-events: none;
+}
+
+.plotpoint {
+  opacity: .85;
+  stroke: #fff;
+  stroke-width: .7;
+  cursor: crosshair;
+}
+
+.plotpoint:focus-visible {
+  outline: none;
+  opacity: 1;
+  stroke: #102334;
+  stroke-width: 3;
+}
+
+
+/* ---------- 8. Responsive y movimiento reducido ---------- */
+
+@media (max-width: 800px) {
+  .grid3,
+  .textgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid3 {
+    gap: 12px;
+  }
+
+  .hero {
+    padding-top: 38px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .sectionhead {
+    flex-direction: column;
+  }
+
+  .topbar {
+    padding: 8px 0;
+    flex-wrap: wrap;
+  }
+
+  .pie-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .pie-svg {
+    width: min(440px, 100%);
+    margin: auto;
+  }
+
+  .plot-stage {
+    min-height: 300px;
+  }
+
+  .metric strong {
+    font-size: 1.4rem;
+  }
+
+  .footrow {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+/* Leyenda de la envolvente para los tres grupos de cilindros */
+.hull-legend { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:0; margin:20px 0 8px; list-style:none; }
+.hull-legend li {display:inline-flex; gap:8px; align-items:center; border-radius:22px; background:#eef4f7; padding:8px 13px; font-weight:700; font-size:.8rem; color:#364a59; }
+.hull-legend .swatch {display:inline-block; }
