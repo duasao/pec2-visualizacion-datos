@@ -257,6 +257,7 @@ function renderArc() {
        
        svg.appendChild(path);
        return path;
+       });
        
     nodeGroups=shown.map(d=>{
       const x=xOf.get(d.id);
