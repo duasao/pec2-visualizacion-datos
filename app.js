@@ -236,14 +236,28 @@ function renderArc() {
       const from=Math.min(xOf.get(e.source),xOf.get(e.target));
       const to=Math.max(xOf.get(e.source),xOf.get(e.target));
       const rx=(to-from)/2, ry=rx*HEIGHT_RATIO;
-      const path=svgEl('path',{
-        d:`M ${from.toFixed(1)} ${AXIS_Y} A ${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 1 ${to.toFixed(1)} ${AXIS_Y}`,
-        class: `arc arc-freq-${e.weight <= 2 ? 'baja' : e.weight <= 4 ? 'media' : 'alta'}`,'stroke-width': (2.5 + e.weight * 2).toFixed(2)
+      const path = svgEl('path', {
+         d: `M ${from.toFixed(1)} ${AXIS_Y} A ${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 1 ${to.toFixed(1)} ${AXIS_Y}`,
+         class: 'arc',
+         'stroke-width': (2.5 + e.weight * 2).toFixed(2)
       });
-      path.dataset.from=e.source;path.dataset.to=e.target;
-      attachTip(path,stage,()=>({title:`${e.source} ↔ ${e.target}`,body:`${e.weight} podio${e.weight===1?'':'s'} juntos · ${e.gps.join(', ')}`}));
-      svg.appendChild(path);return path;
-    });
+       
+       // Color según el número de podios compartidos
+       path.style.stroke =
+          e.weight <= 2 ? '#94A3B8' :
+          e.weight <= 4 ? '#1686A7' :
+          '#D85B32';
+       path.dataset.from = e.source;
+       path.dataset.to = e.target;
+       
+       attachTip(path, stage, () => ({
+          title: `${e.source} ↔ ${e.target}`,
+          body: `${e.weight} podio${e.weight === 1 ? '' : 's'} juntos · ${e.gps.join(', ')}`
+       }));
+       
+       svg.appendChild(path);
+       return path;
+       
     nodeGroups=shown.map(d=>{
       const x=xOf.get(d.id);
       const group=svgEl('g',{class:'svg-node',tabindex:0,role:'button','aria-pressed':'false',
