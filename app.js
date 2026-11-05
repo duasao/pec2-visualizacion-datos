@@ -238,7 +238,7 @@ function renderArc() {
       const rx=(to-from)/2, ry=rx*HEIGHT_RATIO;
       const path=svgEl('path',{
         d:`M ${from.toFixed(1)} ${AXIS_Y} A ${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 1 ${to.toFixed(1)} ${AXIS_Y}`,
-        class:'arc','stroke-width':(1.5 + e.weight * 1.25).toFixed(2)
+        class:'arc','stroke-width':(2.5 + e.weight * 2).toFixed(2)
       });
       path.dataset.from=e.source;path.dataset.to=e.target;
       attachTip(path,stage,()=>({title:`${e.source} ↔ ${e.target}`,body:`${e.weight} podio${e.weight===1?'':'s'} juntos · ${e.gps.join(', ')}`}));
