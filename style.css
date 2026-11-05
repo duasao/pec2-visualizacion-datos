@@ -696,7 +696,7 @@ footer {
 .arc {
   fill: none;
   stroke: var(--arc);
-  opacity: .25;
+  opacity: .52;
   transition: opacity .18s;
 }
 
