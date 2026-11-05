@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Tres técnicas de visualización (pie chart, arc diagram y convex hull) aplicadas a datos reales. PEC2 de Visualización de Datos, UOC.">
+  <meta name="description" content="PEC2 de Visualización de Datos de la UOC: Pie Chart, Arc Diagram y Convex Hull aplicados a Bachillerato, Fórmula 1 y automoción.">
   <title>Inicio · PEC2 Visualización de Datos</title>
 
-  <!-- Tipografías que usa style.css (sin este enlace se ven las del sistema) -->
+  <!-- Tipografías utilizadas en style.css -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Manrope:wght@600;700;800&display=swap">
@@ -40,19 +40,21 @@
   <!-- ===================== CONTENIDO ===================== -->
   <main class="wrap" id="contenido">
 
-    <!-- Hero -->
+    <!-- Presentación -->
     <section class="hero" aria-labelledby="titulo">
       <span class="eyebrow">PEC2 · Técnicas asignadas · UOC</span>
-      <h1 id="titulo">Tres técnicas.<br> Tres formas de ver los datos.</h1>
+      <h1 id="titulo">Tres técnicas.<br>Tres formas de ver los datos.</h1>
       <p class="lead">
-        En esta PEC he trabajado con tres técnicas muy distintas. Para cada una he buscado
-        datos que encajen de verdad, he creado la visualización y he comprobado qué nos permite ver.
+        En esta PEC he trabajado con tres técnicas bastante diferentes. Para cada una he buscado
+        datos que encajaran, he preparado la visualización y he analizado qué nos permite descubrir
+        y qué cosas no podemos concluir solo con ese gráfico.
       </p>
     </section>
 
     <!-- Tarjetas de las tres visualizaciones -->
     <section class="grid3" aria-label="Visualizaciones">
 
+      <!-- Pie Chart -->
       <a class="card" href="pie-chart.html">
         <div class="cardtop">
           <svg viewBox="0 0 270 150" aria-hidden="true">
@@ -65,17 +67,18 @@
         <div class="cardbody">
           <span class="eyebrow">01 · Composición</span>
           <h2>Pie Chart</h2>
-          <p>¿Qué modalidades concentran más alumnado de Bachillerato en Cataluña? Datos de 2023–2024.</p>
+          <p>¿Qué modalidades concentran más alumnado de Bachillerato en Cataluña? Datos del curso 2023–2024.</p>
           <span class="cardfoot">Ver la visualización →</span>
         </div>
       </a>
 
+      <!-- Arc Diagram -->
       <a class="card" href="arc-diagram.html">
         <div class="cardtop">
           <svg viewBox="0 0 270 150" aria-hidden="true">
-            <path d="M30 109 C30 -15 235 -15 235 109" fill="none" stroke="#547c9b" stroke-width="3" opacity=".55"/>
-            <path d="M70 109 C70 40 155 40 155 109" fill="none" stroke="#D9A052" stroke-width="3"/>
-            <path d="M115 109 C115 60 205 60 205 109" fill="none" stroke="#547c9b" stroke-width="3"/>
+            <path d="M30 109 C30 -15 235 -15 235 109" fill="none" stroke="#94A3B8" stroke-width="3"/>
+            <path d="M70 109 C70 40 155 40 155 109" fill="none" stroke="#1686A7" stroke-width="5"/>
+            <path d="M115 109 C115 60 205 60 205 109" fill="none" stroke="#D85B32" stroke-width="8"/>
             <path d="M25 110 H243" stroke="#a1b4bb"/>
             <g fill="#1e817f">
               <circle cx="30" cy="109" r="7"/>
@@ -90,11 +93,12 @@
         <div class="cardbody">
           <span class="eyebrow">02 · Relaciones</span>
           <h2>Arc Diagram</h2>
-          <p>F1 2024: ¿qué pilotos coincidieron más veces en los podios de los 24 Grandes Premios?</p>
+          <p>Fórmula 1 en 2024: ¿qué pilotos coincidieron más veces en los podios de los 24 Grandes Premios?</p>
           <span class="cardfoot">Explorar relaciones →</span>
         </div>
       </a>
 
+      <!-- Convex Hull -->
       <a class="card" href="convex-hull.html">
         <div class="cardtop">
           <svg viewBox="0 0 270 150" aria-hidden="true">
@@ -117,57 +121,68 @@
         <div class="cardbody">
           <span class="eyebrow">03 · Geometría</span>
           <h2>Convex Hull</h2>
-          <p>32 coches históricos: peso y MPG. Comparo los grupos de 4, 6 y 8 cilindros mediante envolventes.</p>
+          <p>32 coches históricos: comparo peso y rendimiento en MPG según el número de cilindros mediante envolventes convexas.</p>
           <span class="cardfoot">Ver las envolventes →</span>
         </div>
       </a>
     </section>
 
-    <!-- Lógica del trabajo -->
+    <!-- Elección de los datos y posibilidad de explorarlos -->
     <section class="panel" aria-labelledby="titulo-logica">
       <div class="sectionhead">
         <div>
           <h2 id="titulo-logica">Por qué he elegido estos datos</h2>
           <p>
-            El punto de partida han sido las tres técnicas asignadas. Después he buscado un conjunto
-            de datos que tenga sentido para cada una: proporciones, conexiones y grupos de puntos.
-            La herramienta viene después, no al revés.
+            El punto de partida han sido las tres técnicas asignadas. Primero he pensado qué tipo de
+            datos necesita cada una: partes de un total, relaciones entre elementos y grupos de puntos.
+            Después he buscado conjuntos de datos que permitieran plantear una pregunta concreta.
+          </p>
+          <p>
+            También quería trabajar con temas que me resultaran cercanos: la educación, la Fórmula 1
+            y el mundo del automóvil. Así podía ir más allá de dibujar los gráficos y centrarme en
+            interpretar lo que muestran.
           </p>
         </div>
-        <span class="tag">3 técnicas · 3 datasets</span>
+        <span class="tag">3 técnicas · 3 conjuntos de datos</span>
       </div>
 
       <div class="textgrid">
         <div>
           <h3>De dónde salen los datos</h3>
           <p>
-            He utilizado datos del CTESC para Bachillerato, resultados oficiales de F1 de 2024
-            y el conjunto histórico mtcars de automóviles.
-            En cada visualización indico la fuente y dejo los datos para consultarlos.
+            He utilizado información del CTESC para las modalidades de Bachillerato en Cataluña,
+            resultados de los Grandes Premios de Fórmula 1 de 2024 y el conjunto histórico
+            <em>mtcars</em> para los coches. En cada página indico la fuente y dejo los datos
+            descargables para poder comprobar las cifras.
           </p>
         </div>
         <div>
-          <h3>Puedes probar las visualizaciones</h3>
+          <h3>Puedes explorar los gráficos</h3>
           <p>
-            Los tres gráficos están hechos en SVG y funcionan desde el navegador. Puedes pasar
-            el ratón por los datos, destacar relaciones y cambiar variables sin tener que iniciar sesión.
+            Las tres visualizaciones son interactivas. Puedes consultar valores al pasar el ratón,
+            destacar y filtrar conexiones entre pilotos o cambiar las variables en el gráfico de
+            coches. La idea es que puedas explorar los resultados, no solo ver una imagen estática.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Nota de evaluación -->
-    <section class="panel" aria-labelledby="titulo-evaluacion">
-      <h2 id="titulo-evaluacion">¿Qué he querido mostrar?</h2>
+    <!-- Criterio de interpretación -->
+    <section class="panel" aria-labelledby="titulo-limites">
+      <h2 id="titulo-limites">Qué hay que tener en cuenta al interpretarlos</h2>
       <p>
-        Para esta PEC he preferido trabajar con temas que me resultan interesantes y cercanos, en lugar de utilizar ejemplos genéricos. Por eso he escogido el Bachillerato en Cataluña, los podios de Fórmula 1 y las características de distintos coches.
-        Mi intención no era simplemente crear tres gráficos, sino entender qué aporta cada técnica y qué podemos descubrir con ella. Puedes entrar en las visualizaciones, probar sus opciones y comprobar cómo cambia la forma de interpretar los datos.
+        Cada técnica ayuda a responder una pregunta diferente, pero también tiene sus límites.
+        El Pie Chart muestra cómo se reparte el alumnado en un curso concreto, no cómo ha evolucionado
+        con los años. El Arc Diagram permite ver quién compartió podio, pero no demuestra que exista
+        rivalidad o colaboración entre pilotos. Y la Convex Hull delimita los puntos extremos de cada
+        grupo de coches, aunque eso no significa que todos los valores del interior sean habituales.
       </p>
       <div class="insight">
-        <p class="insight-title">¿De dónde salen los datos?</p>
+        <p class="insight-title">Lo que me interesa de esta comparación</p>
         <p>
-          También quería que los resultados se pudieran comprobar. Por eso, al final de cada visualización he incluido las fuentes originales y los archivos de datos que he utilizado.
-          Así no tienes que quedarte únicamente con mis conclusiones: puedes consultar las cifras y ver de dónde sale la información que aparece en cada gráfico.
+          Más que quedarme con una conclusión rápida, quería comprobar cuándo resulta útil cada
+          técnica y cuándo convendría representar los mismos datos de otra manera. Por eso, en cada
+          página explico tanto los resultados como sus limitaciones.
         </p>
       </div>
     </section>
