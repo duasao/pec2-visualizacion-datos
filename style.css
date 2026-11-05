@@ -702,6 +702,21 @@ footer {
   transition: opacity .18s, stroke .18s;
 }
 
+/* Coincidencias bajas: 1-2 podios */
+.arc.arc-freq-baja {
+  stroke: #94A3B8;
+}
+
+/* Coincidencias medias: 3-4 podios */
+.arc.arc-freq-media {
+  stroke: #1686A7;
+}
+
+/* Coincidencias altas: 5-8 podios */
+.arc.arc-freq-alta {
+  stroke: #D85B32;
+}
+
 .arc.is-selected {
   opacity: .95;
   stroke: var(--navy);
